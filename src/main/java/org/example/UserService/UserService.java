@@ -32,7 +32,7 @@ public class UserService {
             user.setName(name);
             user.setSurname(surname);
             user.setPatronymic(patronymic);
-            user.setPassword(password);
+            user.setPassword(HashingPasswords.hashPassword(password));
             return userRepository.save(user);
         }
         else {
@@ -42,7 +42,7 @@ public class UserService {
             User user = new User();
             user.setName(name);
             user.setSurname(surname);
-            user.setPassword(password);
+            user.setPassword(HashingPasswords.hashPassword(password));
             return userRepository.save(user);
         }
     }
@@ -82,7 +82,7 @@ public class UserService {
             throw new RuntimeException("Пользователь не найден");
         }
         User user = userOpt.get();
-        user.setPassword(newPassword);
+        user.setPassword(HashingPasswords.hashPassword(newPassword));
         return userRepository.save(user);
     }
 
