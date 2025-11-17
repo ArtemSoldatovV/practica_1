@@ -1,14 +1,10 @@
 package org.example.UserService;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.example.UserService.token.ProductionToxins;
 import org.example.UserService.token.TokenForUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +16,7 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.hashingPasswords = new HashingPasswords(); // создаем энкодер
+        this.hashingPasswords = new HashingPasswords();
     }
 
     public User register(String name, String surname, String patronymic, String password) {

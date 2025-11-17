@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.example"
-version = "0.2.1"
+version = "0.3.0"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -13,6 +13,8 @@ repositories {
 }
 
 dependencies {
+    implementation ("org.springframework.kafka:spring-kafka:3.0.4")
+
     implementation ("org.springframework.boot:spring-boot-starter-security")
 
     implementation ("io.jsonwebtoken:jjwt:0.9.1")
