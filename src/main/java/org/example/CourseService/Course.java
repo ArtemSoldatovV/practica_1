@@ -11,6 +11,17 @@ public class Course {
     @Column(nullable = false)
     String name;
 
+    @Column(nullable = false)
+    String topic;
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
     public String getName() {
         return name;
     }

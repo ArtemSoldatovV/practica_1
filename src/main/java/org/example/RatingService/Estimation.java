@@ -1,7 +1,6 @@
 package org.example.RatingService;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 import org.example.UserService.User;
 import org.example.CourseService.Course;

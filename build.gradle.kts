@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.example"
-version = "0.4.0"
+version = "0.4.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -13,6 +13,13 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.exposed:exposed-core:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-sql:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-testcontainers:0.41.1")
+
     implementation ("org.springframework.kafka:spring-kafka:3.0.4")
 
     implementation ("org.springframework.boot:spring-boot-starter-security")

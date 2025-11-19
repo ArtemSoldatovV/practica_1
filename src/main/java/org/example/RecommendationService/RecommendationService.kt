@@ -9,12 +9,20 @@ import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import java.time.Duration
 import java.util.*
+import org.jetbrains.exposed.sql.Database
 
 class RecommendationService {
 
     private val recommendation = mutableMapOf<String, List<String>>()
     private val kafkaConsumer: KafkaConsumer<String, String>
     private val scope = CoroutineScope(Dispatchers.Default)
+
+    private val db = Database.connect(
+        url = "jdbc:postgresql://localhost:5432/course_processing",
+        driver = "org.postgresql.Driver",
+        user = "server_role",
+        password = "reliable"
+    )
 
     init {
         val props = Properties().apply {
@@ -51,5 +59,5 @@ class RecommendationService {
             }
         }
     }
-    
+
 }
