@@ -17,13 +17,6 @@ class RecommendationService {
     private val kafkaConsumer: KafkaConsumer<String, String>
     private val scope = CoroutineScope(Dispatchers.Default)
 
-    private val db = Database.connect(
-        url = "jdbc:postgresql://localhost:5432/course_processing",
-        driver = "org.postgresql.Driver",
-        user = "server_role",
-        password = "reliable"
-    )
-
     init {
         val props = Properties().apply {
             put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
@@ -32,7 +25,7 @@ class RecommendationService {
             put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer")
         }
         kafkaConsumer = KafkaConsumer(props)
-        kafkaConsumer.subscribe(listOf("recommendations"))
+        kafkaConsumer.subscribe(listOf("recommendation"))
 
         scope.launch {
             while (isActive) {

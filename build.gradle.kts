@@ -29,7 +29,7 @@ dependencies {
     implementation("org.springframework.data:spring-data-jpa:3.5.3")
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
     implementation ("org.postgresql:postgresql:42.6.0")//для PostgreSQL
-    implementation( "org.mindrot:jbcrypt:0.4")//для генерация хеша
+    implementation( "org.mindrot:jbcrypt:0.4")//для генерация хэша
 
     implementation("org.springframework.boot:spring-boot-starter-web")
 

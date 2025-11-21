@@ -1,20 +1,11 @@
 package org.example.UserService;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
+public class DTO_user {
     String name;
-    @Column(nullable = false)
     String surname;
-    @Column(nullable = true)
     String patronymic;
-    @Column(nullable = false)
     String password;
 
     public String getFullName(){
@@ -23,14 +14,6 @@ public class User {
         }else {
             return name + " " + surname;
         }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -56,7 +39,6 @@ public class User {
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
     }
-
     public String getPassword() {
         return password;
     }
@@ -64,5 +46,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

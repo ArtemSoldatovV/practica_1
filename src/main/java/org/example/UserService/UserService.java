@@ -4,14 +4,27 @@ import org.example.UserService.token.ProductionToxins;
 import org.example.UserService.token.TokenForUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
+@RequestMapping("/api/Users")
 public class UserService {
     private final UserRepository userRepository;
     private final HashingPasswords hashingPasswords;
+
+    @PostMapping("/login")
+    public TokenForUser login(@RequestBody DTO_user request) {
+        return login(request.getName(), request.getSurname(), request.getPatronymic(), request.getPassword());
+    }
+
+    @PostMapping("/register")
+    public User register(@RequestBody DTO_user request) {
+        return register(request.getName(), request.getSurname(), request.getPatronymic(), request.getPassword());
+    }
 
     @Autowired
     public UserService(UserRepository userRepository) {
