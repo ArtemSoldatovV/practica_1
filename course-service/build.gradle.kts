@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.example"
-version = "0.4.1"
+version = "0.5.0"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -37,6 +37,10 @@ dependencies {
     implementation("io.ktor:ktor-server-core:2.0.0")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+}
+
+tasks.bootJar {
+    mainClass.set("org.example.UserService.Application") // укажите ваш основной класс
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
