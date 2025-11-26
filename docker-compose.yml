@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-zookeeper:
+  zookeeper:
     image: wurstmeister/zookeeper:3.4.6
     container_name: zookeeper
     ports:
@@ -45,4 +45,5 @@ zookeeper:
       - kafka
     ports:
       - "8084:8080"
+
 
