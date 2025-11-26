@@ -1,12 +1,12 @@
 plugins {
+	id("java")
     kotlin("jvm") version "1.8.0"
     id("org.springframework.boot") version "3.0.0"
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
 }
 
 group = "org.example"
-version = "0.5.0"
-java.sourceCompatibility = JavaVersion.VERSION_17
+version = "0.5.2"
 
 repositories {
     mavenCentral()
@@ -40,7 +40,7 @@ dependencies {
 }
 
 tasks.bootJar {
-    mainClass.set("org.example.UserService.Application") // укажите ваш основной класс
+    mainClass.set("org.example.UserService.Application")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

@@ -11,25 +11,29 @@ import java.time.Duration
 import java.util.*
 import org.jetbrains.exposed.sql.Database
 
-class RecommendationService {
+class RecommendationService(
+    private val kafkaConsumer: KafkaConsumer<String, String>? = null
+) {
 
     private val recommendation = mutableMapOf<String, List<String>>()
-    private val kafkaConsumer: KafkaConsumer<String, String>
     private val scope = CoroutineScope(Dispatchers.Default)
 
     init {
-        val props = Properties().apply {
-            put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
-            put(ConsumerConfig.GROUP_ID_CONFIG, "recommendation-group")
-            put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer")
-            put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer")
+        val consumer = kafkaConsumer ?: run {
+            val props = Properties().apply {
+                put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
+                put(ConsumerConfig.GROUP_ID_CONFIG, "recommendation-group")
+                put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer")
+                put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer")
+            }
+            KafkaConsumer<String, String>(props).apply {
+                subscribe(listOf("recommendation"))
+            }
         }
-        kafkaConsumer = KafkaConsumer(props)
-        kafkaConsumer.subscribe(listOf("recommendation"))
-
+		
         scope.launch {
             while (isActive) {
-                val records = kafkaConsumer.poll(Duration.ofMillis(100))
+                val records = consumer?.poll(Duration.ofMillis(100)) ?: emptyList()
                 for (record in records) {
                     val userId = record.key()
                     val recs = record.value().split(",")
